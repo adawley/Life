@@ -170,7 +170,7 @@
     window.startLife = function() {
         console.log('Starting...'); //XXX
 
-        var grid = unitTests.testDie1(),
+        var grid = unitTests.testBlink1(),
             iter1 = generation(grid),
             iter2 = generation(iter1);
 
@@ -184,12 +184,49 @@
     var unitTests = {
 
         testDie1: function(){
-            return Life.util.generateGrid(5,5,[
-                {x:1,y:1}, // 0100
-                {x:1,y:2}, // 0100
-                {x:2,y:3}, // 0010
-            ]);
+            return [
+                [0,0,0,0,0],
+                [0,1,0,0,0],
+                [0,1,0,0,0],
+                [0,0,1,0,0],
+                [0,0,0,0,0],
+                [0,0,0,0,0]
+            ];
         },
+
+        testDie2: function(){
+            return [
+                [0,0,0,0,0],
+                [0,0,0,0,0],
+                [0,0,1,0,0],
+                [0,1,0,1,0],
+                [0,0,0,0,0],
+                [0,0,0,0,0]
+            ];
+        },
+
+        testDie3: function(){
+            return [
+                [0,0,0,0,0],
+                [0,0,0,1,0],
+                [0,0,1,0,0],
+                [0,1,0,0,0],
+                [0,0,0,0,0],
+                [0,0,0,0,0]
+            ];
+        },  
+
+        testBlink1: function(){
+            return [
+                [0,0,0,0,0],
+                [0,0,0,0,0],
+                [0,1,1,1,0],
+                [0,0,0,0,0],
+                [0,0,0,0,0],
+                [0,0,0,0,0]
+            ];
+        },        
+
 
         test1: function() {
             var cell, death, survival, birth;
