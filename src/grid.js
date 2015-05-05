@@ -19,6 +19,8 @@
             numRows = grid.length,
             numCols = grid[0].length;
 
+        this.elCurrentTable = elTable;
+
         for (var row = 0; row < numRows; row++) {
 
             elRow = document.createElement('tr');
@@ -27,14 +29,26 @@
                 cellVal = grid[row][col];
 
                 elCell = document.createElement('td');
-                elCell.innerHTML = cellVal;
+
+                if(cellVal == 1){
+                    elCell.setAttribute('class', 'bg-black');
+                }
+
+                elCell.innerHTML = "&nbsp;&nbsp;";
+
                 elRow.appendChild(elCell);
             }
 
             elTable.appendChild(elRow);
         }
 
+        while (this.elMaster.firstChild) {
+          this.elMaster.removeChild(this.elMaster.firstChild);
+        }
+
         this.elMaster.appendChild(elTable);
+
+        
     };
 
     window.Grid = new Grid();

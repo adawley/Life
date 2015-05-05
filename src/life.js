@@ -152,15 +152,6 @@
         }
 
         return newGrid;
-
-        /*
-        console.log('------------'); //XXX
-        Life.util.showGrid(Deaths.calculate(grid));
-        console.log('------------'); //XXX
-        Life.util.showGrid(Survivals.calculate(grid));
-        console.log('------------'); //XXX
-        Life.util.showGrid(Births.calculate(grid));
-        */
     }
 
     //
@@ -170,16 +161,22 @@
     window.startLife = function() {
         console.log('Starting...'); //XXX
 
-        var grid = unitTests.testBlink1(),
-            iter1 = generation(grid),
-            iter2 = generation(iter1);
+        var grid = unitTests.testBeehive2();
 
-        Life.util.showGrid(grid);
-        console.log('------------'); //XXX
-        Life.util.showGrid(iter1);
-        console.log('------------'); //XXX
-        Life.util.showGrid(iter2);
+        if(Life.interval >= 0){
+            clearInterval(Life.interval);
+        }
+
+        window.Grid.show(grid);
+        Life.interval = setInterval(function(){
+            grid = generation(grid);
+            window.Grid.show(grid);
+        },1000);
+
     };
+    window.stopLife = function(){
+        clearInterval(Life.interval);
+    }
 
     var unitTests = {
 
@@ -214,7 +211,7 @@
                 [0,0,0,0,0],
                 [0,0,0,0,0]
             ];
-        },  
+        },
 
         testBlink1: function(){
             return [
@@ -225,8 +222,29 @@
                 [0,0,0,0,0],
                 [0,0,0,0,0]
             ];
-        },        
+        },
 
+
+        testBeehive1: function(){
+            return [
+                [0,0,0,0,0,0],
+                [0,0,0,0,0,0],
+                [0,0,1,0,0,0],
+                [0,0,1,1,1,0],
+                [0,0,0,0,0,0],
+                [0,0,0,0,0,0],
+                [0,0,0,0,0,0]
+            ];
+        },
+
+        testBeehive2: function(){
+            return Life.util.generateGrid(20,20,[
+                    {x:10,y:10},
+                    {x:9,y:11},
+                    {x:10,y:11},
+                    {x:11,y:11}
+                ]);
+        },
 
         test1: function() {
             var cell, death, survival, birth;
@@ -458,4 +476,3 @@
 }(window._));
 
 
-window.startLife();
