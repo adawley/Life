@@ -30,7 +30,7 @@
 
                 elCell = document.createElement('td');
 
-                if(cellVal == 1){
+                if(cellVal === 1){
                     elCell.setAttribute('class', 'bg-black');
                 }
 
@@ -48,7 +48,7 @@
 
         this.elMaster.appendChild(elTable);
 
-        
+
     };
 
     window.Grid = new Grid();

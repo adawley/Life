@@ -2,21 +2,6 @@
 
     'use strict';
 
-
-    var gridz = [
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
-        [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    ];
-
-
     var Deaths = {
         underPopulation: function(cell) {
             var isAlive = cell.val === 1,
@@ -140,8 +125,10 @@
             survivals = Survivals.calculate(grid),
             births = Births.calculate(grid);
 
-        var x=0, xSize=grid[0].length,
-            y=0, ySize=grid.length,
+        var x = 0,
+            xSize = grid[0].length,
+            y = 0,
+            ySize = grid.length,
             newGrid = [];
 
         for (; y < ySize; y++) {
@@ -158,96 +145,102 @@
     //
     //
     //
-    window.startLife = function() {
-        console.log('Starting...'); //XXX
-
-        var grid = unitTests.testBeehive2();
-
-        if(Life.interval >= 0){
-            clearInterval(Life.interval);
-        }
-
-        window.Grid.show(grid);
-        Life.interval = setInterval(function(){
-            grid = generation(grid);
-            window.Grid.show(grid);
-        },1000);
-
-    };
-    window.stopLife = function(){
-        clearInterval(Life.interval);
-    }
 
     var unitTests = {
 
-        testDie1: function(){
+        testDie1: function() {
             return [
-                [0,0,0,0,0],
-                [0,1,0,0,0],
-                [0,1,0,0,0],
-                [0,0,1,0,0],
-                [0,0,0,0,0],
-                [0,0,0,0,0]
+                [0, 0, 0, 0, 0],
+                [0, 1, 0, 0, 0],
+                [0, 1, 0, 0, 0],
+                [0, 0, 1, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
             ];
         },
 
-        testDie2: function(){
+        testDie2: function() {
             return [
-                [0,0,0,0,0],
-                [0,0,0,0,0],
-                [0,0,1,0,0],
-                [0,1,0,1,0],
-                [0,0,0,0,0],
-                [0,0,0,0,0]
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 1, 0, 0],
+                [0, 1, 0, 1, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
             ];
         },
 
-        testDie3: function(){
+        testDie3: function() {
             return [
-                [0,0,0,0,0],
-                [0,0,0,1,0],
-                [0,0,1,0,0],
-                [0,1,0,0,0],
-                [0,0,0,0,0],
-                [0,0,0,0,0]
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 1, 0],
+                [0, 0, 1, 0, 0],
+                [0, 1, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
             ];
         },
 
-        testBlink1: function(){
+        testBlink1: function() {
             return [
-                [0,0,0,0,0],
-                [0,0,0,0,0],
-                [0,1,1,1,0],
-                [0,0,0,0,0],
-                [0,0,0,0,0],
-                [0,0,0,0,0]
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 1, 1, 1, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0]
             ];
         },
 
 
-        testBeehive1: function(){
+        testBeehive1: function() {
             return [
-                [0,0,0,0,0,0],
-                [0,0,0,0,0,0],
-                [0,0,1,0,0,0],
-                [0,0,1,1,1,0],
-                [0,0,0,0,0,0],
-                [0,0,0,0,0,0],
-                [0,0,0,0,0,0]
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 1, 0, 0, 0],
+                [0, 0, 1, 1, 1, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0]
             ];
         },
 
-        testBeehive2: function(){
-            return Life.util.generateGrid(20,20,[
-                    {x:10,y:10},
-                    {x:9,y:11},
-                    {x:10,y:11},
-                    {x:11,y:11}
-                ]);
+        testBeehive2: function() {
+            return Life.util.generateGrid(20, 20, [
+                {
+                    x: 10,
+                    y: 10
+                },
+                {
+                    x: 9,
+                    y: 11
+                },
+                {
+                    x: 10,
+                    y: 11
+                },
+                {
+                    x: 11,
+                    y: 11
+                }
+            ]);
         },
 
         test1: function() {
-            var cell, death, survival, birth;
+            var cell, death, survival, birth,
+
+                grid = [
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                ];
 
             cell = new Cell(grid, 4, 4);
             death = Deaths.test(cell);
@@ -281,7 +274,10 @@
     //
     //
     var Cell = function(grid, x, y) {
-        var coordinates = Life.util.getInfiniteCoordinates(grid[0].length, grid.length, {x:x, y:y});
+        var coordinates = Life.util.getInfiniteCoordinates(grid[0].length, grid.length, {
+            x: x,
+            y: y
+        });
 
         // absolute coordinates (i.e. negative values)
         this.x = coordinates.x;
@@ -301,6 +297,27 @@
     //
     //
     var Life = {
+        start: function() {
+            console.log('Starting...'); //XXX
+
+            var grid = unitTests.testBeehive2();
+
+            if (Life.interval >= 0) {
+                clearInterval(Life.interval);
+            }
+
+            window.Grid.show(grid);
+            Life.interval = setInterval(function() {
+                grid = generation(grid);
+                window.Grid.show(grid);
+            }, 1000);
+
+        },
+
+        stop: function() {
+            clearInterval(Life.interval);
+        },
+
         util: {
             pad: function(pad, str, padLeft) {
                 if (str === undefined) {
@@ -313,9 +330,9 @@
                 }
             },
 
-            generateGrid: function(xSize, ySize, liveCells){
-                var x=0,
-                    y=0,
+            generateGrid: function(xSize, ySize, liveCells) {
+                var x = 0,
+                    y = 0,
                     grid = [];
 
                 for (; y < ySize; y++) {
@@ -325,11 +342,11 @@
                     }
                 }
 
-                liveCells.forEach(function(coor){
-                    if(coor.x > xSize){
+                liveCells.forEach(function(coor) {
+                    if (coor.x > xSize) {
                         console.log('x coordinate too big: ', coor.x); //XXX
                     }
-                    if(coor.y > ySize){
+                    if (coor.y > ySize) {
                         console.log('y coordinate too big: ', coor.y); //XXX
                     }
 
@@ -474,5 +491,3 @@
     window.Life = Life;
 
 }(window._));
-
-
