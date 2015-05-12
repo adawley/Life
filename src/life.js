@@ -297,25 +297,49 @@
     //
     //
     var Life = {
+
+        clear: function(){
+            Life.util.fillGrid(Life.grid, 0);
+            window.Grid.show(Life.grid);
+        },
+
+        grid: [],
+
+        onCellClick: function(col, row){
+            var newVal = (Life.grid[row][col] === 1) ? 0 : 1;
+
+            Life.grid[row][col] = newVal;
+
+            window.Grid.show(Life.grid);
+        },
+
         start: function() {
             console.log('Starting...'); //XXX
-
-            var grid = unitTests.testBeehive2();
 
             if (Life.interval >= 0) {
                 clearInterval(Life.interval);
             }
 
-            window.Grid.show(grid);
+            window.Grid.show(Life.grid);
             Life.interval = setInterval(function() {
-                grid = generation(grid);
-                window.Grid.show(grid);
-            }, 1000);
+
+                // get the next generation
+                Life.grid = generation(Life.grid);
+
+                // update the grid
+                window.Grid.update(Life.grid);
+            }, 100);
 
         },
 
         stop: function() {
+            console.log('Stopping...'); //XXX
             clearInterval(Life.interval);
+        },
+
+        test: function(testName){
+            Life.grid = unitTests[testName]();
+            window.Grid.show(Life.grid);
         },
 
         util: {
@@ -328,6 +352,13 @@
                 } else {
                     return (str + pad).substring(0, pad.length);
                 }
+            },
+
+            fillGrid: function(grid, val){
+                Life.util.iterateGrid(grid, function(cell){
+                    console.log(cell); //XXX
+                    cell.val = val;
+                });
             },
 
             generateGrid: function(xSize, ySize, liveCells) {
