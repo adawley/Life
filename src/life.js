@@ -355,9 +355,10 @@
             },
 
             fillGrid: function(grid, val){
-                Life.util.iterateGrid(grid, function(cell){
-                    console.log(cell); //XXX
-                    cell.val = val;
+                grid.forEach(function(row, rowi){
+                    row.forEach(function(cell, coli){
+                        grid[rowi][coli] = val;
+                    });
                 });
             },
 
